@@ -1,0 +1,75 @@
+import dash
+from dash.dependencies import Input, Output, State
+from dash.exceptions import PreventUpdate
+from bettydash.consts import MENU_ITEMS
+
+from dash import dcc, html
+#from ._templates import home_layout, page1_layout, page2_layout
+from bettyboard.pages import home
+
+
+def activate(input_id):
+    menu_n = len(MENU_ITEMS)
+    menu_TF = [False for i in range(menu_n)]
+    try:
+        menu_idx = MENU_ITEMS.index(input_id.split('_', maxsplit=1)[1])
+        menu_TF[menu_idx] = True
+    except:
+        pass
+    return menu_TF
+# =============================================================================
+# Callbacks
+# =============================================================================
+
+
+def get_callbacks(app_dash):
+    # -----------------------------------------------
+    # -----------------------------------------------
+    # @app_dash.callback(
+    #     [Output(f'content_{menu}', 'active') for menu in MENU_ITEMS],
+    #     [Input(f'sideMenu_{menu}', 'n_clicks') for menu in MENU_ITEMS])
+    # def display_tab(*args):
+    #     ctx = dash.callback_context  # 어떤 Input이 triggered 되었나.
+    #     if not ctx.triggered:
+    #         raise PreventUpdate
+    #     else:
+    #         input_id = ctx.triggered[0]['prop_id'].split('.')[0]
+    #     return activate(input_id)
+
+    # @app_dash.callback(
+    #     [Output(f'sideMenu_{menu}', 'active') for menu in MENU_ITEMS],
+    #     [Input(f'sideMenu_{menu}', 'n_clicks') for menu in MENU_ITEMS])
+    # def activate_menu(*args):
+    #     ctx = dash.callback_context
+    #     if not ctx.triggered:
+    #         raise PreventUpdate
+    #     else:
+    #         input_id = ctx.triggered[0]['prop_id'].split('.')[0]
+    #     return activate(input_id)
+
+    # @app_dash.callback(
+    #     Output('nav_bread', 'text'),
+    #     [Input(f'sideMenu_{menu}', 'n_clicks') for menu in MENU_ITEMS])
+    # def drop_bread(*args):
+    #     ctx = dash.callback_context
+    #     if not ctx.triggered:
+    #         raise PreventUpdate
+    #     else:
+    #         #input_id = ctx.triggered[0]['prop_id'].split('.')[0]
+    #         input_id = ctx.triggered[0]['prop_id'].split(
+    #             '.')[0].split('_', maxsplit=1)[1]
+    #     return (input_id.replace('_', ' ')).upper()
+
+    # @app_dash.callback(
+    #     Output("page-content", "children"),
+    #     [Input("url", "pathname")])
+    # def render_page_content(pathname):
+    #     if pathname == "/":
+    #         return home_layout
+    #     elif pathname == "/page-1":
+    #         return page1_layout
+    #     elif pathname == "/page-2":
+    #         return page2_layout
+    #     else:
+    #         return html.Div("404 - Page not found")
+    print(f"callback")
