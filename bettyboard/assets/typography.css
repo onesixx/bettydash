@@ -1,0 +1,18 @@
+body {
+    font-family: sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h6 {
+    color: hotpink
+        /* color: hotpink !importants */
+}
+
+h5 {
+    font-size: 1.125rem;
+    margin-bottom: 15px;
+    color: hotpink;
+}
