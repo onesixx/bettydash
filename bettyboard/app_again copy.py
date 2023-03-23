@@ -2,21 +2,30 @@ import dash
 import dash_bootstrap_components as dbc
 from dash import Input, Output, State, dcc, html
 
-app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
+app = dash.Dash(
+    __name__, 
+    external_stylesheets=[
+        dbc.themes.BOOTSTRAP,
+        dbc.icons.FONT_AWESOME
+    ]
+)
 
 server = app.server
 
 sidebar = html.Div(className="sidebar", **{"data-color": "orange", "data-image": "assets/img/sidebar-5.jpg", }, children=[
     html.Div(className="sidebar-wrapper", children=[
         ###### LOGO ######
-        html.Div(className="logo", children=[
-            html.A(href="http://www.creative-tim.com",
-                       className="simple-text logo-mini", children="Ct"),
-            html.A(href="http://www.creative-tim.com",
+        html.Div(className="logo", style={'display': 'flex',  'align-items': "center","justify-content": "center", 'padding' :'10px'}, children=[
+            html.Img(#href="http://www.creative-tim.com",
+                    src="assets/logo_small.png", style={'display': 'inline-block'}
+                ),
+                       #className="simple-text logo-mini"), #, children="Ct"),
+            html.A(href="http://www.creative-tim.com", 
+                   style={'display': 'inline-block', 'box-sizing': 'border-box', 'padding': '10px'},
                    className="simple-text logo-normal", children="Creative Tim"),
         ]),
         ###### USER ######
-        html.Div(className="user", children=[
+        dbc.Nav(className="user", vertical=True, pills=True, children=[
             html.Div(className="photo", children=[
                 html.Img(src="assets/user-01.jpg")
             ]),
@@ -114,7 +123,7 @@ navbar = dbc.Navbar(className="navbar-expand-lg", color="light", dark=False,  ch
     html.Div(className="container-fluid", children=[
         html.Div(className="navbar-wrapper",  children=[
             html.Div(className="navbar-minimize", children=[
-                dbc.Button(className="btn btn-warning btn-fill btn-round btn-icon d-none d-lg-block", id="minimizeSidebar", color="warning", outline=True, children=[
+                dbc.Button(className="btn btn-warning btn-fill btn-round btn-icon d-none d-lg-block", id="minimizeSidebar", children=[
                     html.I(
                         className="fa fa-ellipsis-v visible-on-sidebar-regular"),
                     html.I(
@@ -125,8 +134,7 @@ navbar = dbc.Navbar(className="navbar-expand-lg", color="light", dark=False,  ch
         ]),
 
         dbc.Button(
-            className="navbar-toggler navbar-toggler-right", id="minimizeSidebar",
-            color="warning", outline=True,
+            className="navbar-toggler navbar-toggler-right", 
             # type="button" data-toggle="collapse"
             # aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation"
             children=[
@@ -135,51 +143,60 @@ navbar = dbc.Navbar(className="navbar-expand-lg", color="light", dark=False,  ch
                 html.Span(className="navbar-toggler-bar burger-lines"),
             ]
         ),
-        dbc.Collapse(id="navbar-collapse justify-content-end", navbar=True, children=[
-            dbc.Row(align="center", children=[
-                    dbc.Col(
-                        # dbc.FormGroup(
-                        html.Div(className="navbar-search-form", children=[
-                            html.I(className="nc-icon nc-zoom-split"),
-                            dbc.Input(type="text", placeholder="Search..."),
-                        ]),
-                    ),
-                    # no_gutters=True,
-                    ]),
-        ]),
-        dbc.Nav(className="ml-auto",  navbar=True, children=[
-            dbc.DropdownMenu(label=html.I(className="nc-icon nc-planet"), nav=True, in_navbar=True, children=[
-                dbc.DropdownMenuItem("Create New Post", href="#"),
-                dbc.DropdownMenuItem(divider=True),
-                dbc.DropdownMenuItem("Another action", href="#"),
-            ]),
-            dbc.DropdownMenu(
-                label=[
-                    html.I(className="nc-icon nc-bell-55"),
-                    html.Span("5", className="notification"),
-                    html.Span("Notification", className="d-lg-none"),
-                ],
-                nav=True, in_navbar=True, children=[
-                    dbc.DropdownMenuItem("Notification 1", href="#"),
-                    dbc.DropdownMenuItem("Notification 2", href="#"),
+        dbc.Collapse(navbar=True, children=[
+            html.Div(className="collapse navbar-collapse justify-content-end", children=[
+                html.Ul(className="nav navbar-nav mr-auto", children=[
+                    # html.Form(className="navbar-form navbar-left navbar-search-form", role="search", children=[
+                    #     html.Div(className="input-group", children=[
+                    #         html.I(className="nc-icon nc-zoom-split"),
+                    #         dbc.Input(className="form-control", type="text", placeholder="Search...")
+                    #     ]),
+                    # ]),
                 ]),
-            dbc.DropdownMenu(label=html.I(className="nc-icon nc-bullet-list-67"), nav=True, in_navbar=True, right=True, children=[
-                dbc.DropdownMenuItem(href="#", children=[
-                    html.I(className="nc-icon nc-email-85"),
-                    " Messages",
-                ]),
-                dbc.DropdownMenuItem(divider=True),
-                dbc.DropdownMenuItem(href="#", children=[
-                    html.I(className="nc-icon nc-lock-circle-open"),
-                    " Lock Screen",
-                ]),
-                dbc.DropdownMenuItem(className="text-danger", href="#", children=[
-                    html.I(className="nc-icon nc-button-power"),
-                    " Log out",
-                ]),
-            ]),
-        ]),
 
+                dbc.Nav(navbar=True, children=[
+                    dbc.DropdownMenu(
+                        label=html.I(className="nc-icon nc-planet"), 
+                        nav=True, in_navbar=True, children=[
+                            dbc.DropdownMenuItem("Create New Post", href="#"),
+                            dbc.DropdownMenuItem("Manage Something", href="#"),
+                            dbc.DropdownMenuItem("Do Nothing", href="#"),
+                            dbc.DropdownMenuItem("Submit to live", href="#"),
+                            dbc.DropdownMenuItem(divider=True),
+                            dbc.DropdownMenuItem("Another action", href="#"),
+                    ]),
+                    dbc.DropdownMenu(
+                        label=[
+                            html.I(className="nc-icon nc-bell-55"),
+                            html.Span("5", className="notification"),
+                            html.Span("Notification", className="d-lg-none"),
+                        ],
+                        nav=True, in_navbar=True, children=[
+                            dbc.DropdownMenuItem("Notification 1", href="#"),
+                            dbc.DropdownMenuItem("Notification 2", href="#"),
+                            dbc.DropdownMenuItem("Notification 3", href="#"),
+                            dbc.DropdownMenuItem("Notification 4", href="#"),
+                    ]),
+                    dbc.DropdownMenu(
+                        label=html.I(className="nc-icon nc-bullet-list-67"), 
+                        nav=True, in_navbar=True, align_end=True, children=[
+                        dbc.DropdownMenuItem(href="#", children=[
+                            html.I(className="nc-icon nc-email-85"),
+                            " Messages",
+                        ]),
+                        dbc.DropdownMenuItem(divider=True),
+                        dbc.DropdownMenuItem(href="#", children=[
+                            html.I(className="nc-icon nc-lock-circle-open"),
+                            " Lock Screen",
+                        ]),
+                        dbc.DropdownMenuItem(className="text-danger", href="#", children=[
+                            html.I(className="nc-icon nc-button-power"),
+                            " Log out",
+                        ]),
+                    ]),
+                ]),
+            ]),
+        ]),
     ]),
 ])
 
@@ -255,4 +272,4 @@ app.layout = html.Div(className="wrapper", children=[
 ],)
 
 if __name__ == "__main__":
-    app.run_server(debug=True)
+    app.run_server(debug=True, port=8886)
