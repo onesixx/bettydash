@@ -3,7 +3,7 @@ import dash_bootstrap_components as dbc
 from dash import Input, Output, State, dcc, html
 
 app = dash.Dash(
-    __name__, 
+    __name__,
     external_stylesheets=[
         dbc.themes.BOOTSTRAP,
         dbc.icons.FONT_AWESOME
@@ -15,14 +15,10 @@ server = app.server
 sidebar = html.Div(className="sidebar", **{"data-color": "orange", "data-image": "assets/img/sidebar-5.jpg", }, children=[
     html.Div(className="sidebar-wrapper", children=[
         ###### LOGO ######
-        html.Div(className="logo", style={'display': 'flex',  'align-items': "center","justify-content": "center", 'padding' :'10px'}, children=[
-            html.Img(#href="http://www.creative-tim.com",
-                    src="assets/logo_small.png", style={'display': 'inline-block'}
-                ),
-                       #className="simple-text logo-mini"), #, children="Ct"),
-            html.A(href="http://www.creative-tim.com", 
-                   style={'display': 'inline-block', 'box-sizing': 'border-box', 'padding': '10px'},
-                   className="simple-text logo-normal", children="Creative Tim"),
+        html.Div(className="logo", style={'display': 'flex',  'align-items': "center", "justify-content": "center", 'padding': '15px 0'}, children=[
+            html.Img(src="assets/logo_small.png"),
+            html.A(href="http://onesixx.com", style={'padding': '0 10px'},
+                   className="simple-text logo-normal", children="BECOM"),
         ]),
         ###### USER ######
         dbc.Nav(className="user", vertical=True, pills=True, children=[
@@ -39,36 +35,31 @@ sidebar = html.Div(className="sidebar", **{"data-color": "orange", "data-image":
                     className="collapsed",
                     **{"data-toggle": "collapse", "href": "#collapseExample"}
                 ),
-                html.Div(
-                    html.Ul([
+                html.Div(className="collapse", id="collapseExample", children=[
+                    html.Ul(className="nav", children=[
                         html.Li(
-                            html.A([
-                                html.Span(
-                                    "MP", className="sidebar-mini"),
+                            html.A(href="#pablo", children=[
+                                html.Span("MP", className="sidebar-mini"),
                                 html.Span("My Profile",
                                           className="sidebar-normal")
-                            ], href="#pablo"),
+                            ])
                         ),
                         html.Li(
-                            html.A([
-                                html.Span(
-                                    "EP", className="sidebar-mini"),
+                            html.A(href="#pablo", children=[
+                                html.Span("EP", className="sidebar-mini"),
                                 html.Span("Edit Profile",
                                           className="sidebar-normal")
-                            ], href="#pablo"),
+                            ])
                         ),
                         html.Li(
-                            html.A([
-                                html.Span(
-                                    "S", className="sidebar-mini"),
+                            html.A(href="#pablo", children=[
+                                html.Span("S", className="sidebar-mini"),
                                 html.Span(
                                     "Settings", className="sidebar-normal")
-                            ], href="#pablo"),
+                            ]),
                         )
-                    ], className="nav"),
-                    className="collapse",
-                    id="collapseExample"
-                )
+                    ]),
+                ])
             ])
         ]),
         ###### NAV ######
@@ -134,7 +125,7 @@ navbar = dbc.Navbar(className="navbar-expand-lg", color="light", dark=False,  ch
         ]),
 
         dbc.Button(
-            className="navbar-toggler navbar-toggler-right", 
+            className="navbar-toggler navbar-toggler-right",
             # type="button" data-toggle="collapse"
             # aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation"
             children=[
@@ -156,7 +147,7 @@ navbar = dbc.Navbar(className="navbar-expand-lg", color="light", dark=False,  ch
 
                 dbc.Nav(navbar=True, children=[
                     dbc.DropdownMenu(
-                        label=html.I(className="nc-icon nc-planet"), 
+                        label=html.I(className="nc-icon nc-planet"),
                         nav=True, in_navbar=True, children=[
                             dbc.DropdownMenuItem("Create New Post", href="#"),
                             dbc.DropdownMenuItem("Manage Something", href="#"),
@@ -164,7 +155,7 @@ navbar = dbc.Navbar(className="navbar-expand-lg", color="light", dark=False,  ch
                             dbc.DropdownMenuItem("Submit to live", href="#"),
                             dbc.DropdownMenuItem(divider=True),
                             dbc.DropdownMenuItem("Another action", href="#"),
-                    ]),
+                        ]),
                     dbc.DropdownMenu(
                         label=[
                             html.I(className="nc-icon nc-bell-55"),
@@ -176,24 +167,24 @@ navbar = dbc.Navbar(className="navbar-expand-lg", color="light", dark=False,  ch
                             dbc.DropdownMenuItem("Notification 2", href="#"),
                             dbc.DropdownMenuItem("Notification 3", href="#"),
                             dbc.DropdownMenuItem("Notification 4", href="#"),
-                    ]),
+                        ]),
                     dbc.DropdownMenu(
-                        label=html.I(className="nc-icon nc-bullet-list-67"), 
+                        label=html.I(className="nc-icon nc-bullet-list-67"),
                         nav=True, in_navbar=True, align_end=True, children=[
-                        dbc.DropdownMenuItem(href="#", children=[
-                            html.I(className="nc-icon nc-email-85"),
-                            " Messages",
+                            dbc.DropdownMenuItem(href="#", children=[
+                                html.I(className="nc-icon nc-email-85"),
+                                " Messages",
+                            ]),
+                            dbc.DropdownMenuItem(divider=True),
+                            dbc.DropdownMenuItem(href="#", children=[
+                                html.I(className="nc-icon nc-lock-circle-open"),
+                                " Lock Screen",
+                            ]),
+                            dbc.DropdownMenuItem(className="text-danger", href="#", children=[
+                                html.I(className="nc-icon nc-button-power"),
+                                " Log out",
+                            ]),
                         ]),
-                        dbc.DropdownMenuItem(divider=True),
-                        dbc.DropdownMenuItem(href="#", children=[
-                            html.I(className="nc-icon nc-lock-circle-open"),
-                            " Lock Screen",
-                        ]),
-                        dbc.DropdownMenuItem(className="text-danger", href="#", children=[
-                            html.I(className="nc-icon nc-button-power"),
-                            " Log out",
-                        ]),
-                    ]),
                 ]),
             ]),
         ]),
